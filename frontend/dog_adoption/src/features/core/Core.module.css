@@ -1,0 +1,138 @@
+.core_background {
+    background-color: #add5ff;
+    background-image: url("../../static/background.gif");
+}
+
+.core_title {
+    font-family: "Ultra", serif;
+    font-weight: normal;
+    text-align: center;
+    font-size: 48px;
+    margin-top: 5px;
+}
+
+.core_edit_profile {
+    font-family: "Ultra", serif;
+    font-weight: normal;
+    text-align: center;
+}
+
+.core_signUp {
+    display: flex;
+    flex-direction: column;
+}
+
+.core_text {
+    color: rgb(6, 153, 211);
+    text-align: center;
+    cursor: pointer;
+}
+
+.core_header {
+    position: sticky;
+    top: 0;
+    background-color: #5ea4ff;
+    padding: 10px;
+    border-bottom: 1px solid #add5ff;
+    object-fit: contain;
+    display: flex;
+    z-index: 1;
+    justify-content: space-between;
+    text-decoration: none;
+}
+
+.core_btnModal {
+    background-color: transparent;
+    color: #2247cf;
+    padding-top: 10px;
+    font-size: 48px;
+    outline: none;
+    cursor: pointer;
+}
+
+.core_logout {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.core_avatar {
+    background-color: transparent;
+    color: #2247cf;
+    padding-top: 3px;
+    font-size: 32px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.core_data {
+    padding: 20px;
+}
+
+.core_link {
+    text-decoration: none;
+}
+
+.core_link:visited {
+    color: inherit;
+}
+
+.core_progress {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100vw;
+}
+
+.paginationButtons {
+    width: 80%;
+    height: 40px;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+}
+
+.paginationButtons a {
+    padding: 10px;
+    margin: 8px;
+    border-radius: 5px;
+    border: 1px solid #2247cf;
+    color: #2247cf;
+    cursor: pointer;
+}
+
+.paginationButtons a:hover {
+    color: #fafafa;
+    background: #2247cf;
+}
+
+.paginationActive a {
+    color: #fafafa;
+    background: #2247cf;
+}
+
+.searchContainer {
+    display: flex;
+    background-color: rgba(255, 255, 255, 0.15);
+    padding-right: 20px;
+    padding-left: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.searchIcon {
+    align-self: flex-end;
+    margin-bottom: 5px;
+}
+
+.searchInput {
+    width: 250px;
+    margin: 5px;
+}
