@@ -23,7 +23,7 @@
 }
 
 .detail_right {
-    width: 50%;
+    max-width: 50%;
     padding-left: 10px;
     padding-bottom: 10px;
 }
@@ -86,9 +86,9 @@
 
 .detail_table_type {
     width: 50%;
-    display: inline-flex;
     font-weight: 500;
     font-size: 24px;
+    overflow-wrap: break-word;
 }
 
 .detail_table_value {
