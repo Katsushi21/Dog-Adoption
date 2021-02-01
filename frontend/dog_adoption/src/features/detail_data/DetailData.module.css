@@ -3,6 +3,25 @@
     background-image: url("../../static/background.gif");
 }
 
+.detail_back_container {
+    display: flex;
+    height: 50px;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px 30px;
+}
+
+.detail_back_button {
+    padding: 20px 15px;
+    font-weight: bold;
+    color: #88a8ca;
+    background-color: #FFF;
+    border: solid 3px #6091d3;
+    border-radius: 10px;
+    font-size: 40px;
+}
+
 .detail_image {
     height: 400px;
     object-fit: contain;
@@ -14,7 +33,9 @@
     width: 90%;
     margin-left: auto;
     margin-right: auto;
-    padding: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 50px;
 }
 
 .detail_left {
