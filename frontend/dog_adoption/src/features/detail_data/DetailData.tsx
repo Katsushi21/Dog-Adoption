@@ -2,8 +2,9 @@ import React from "react";
 import {useParams} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {selectData, toCharUppercase} from "../dog_data/dog_dataSlice";
-import {IoFemale, IoMale} from "react-icons/all";
+import {IoFemale, IoMale, MdKeyboardReturn} from "react-icons/all";
 import styles from "./DetailData.module.css";
+import {Button} from "@material-ui/core";
 
 const DetailData = () => {
     const {id} = useParams();
@@ -11,6 +12,11 @@ const DetailData = () => {
 
     return (
         <div className={styles.detail_data}>
+            <div className={styles.detail_back_container}>
+                <Button className={styles.detail_back_button}>
+                    <MdKeyboardReturn/>BACK
+                </Button>
+            </div>
             {detailData && detailData.map(detail =>
                 // eslint-disable-next-line eqeqeq
                 id == detail.id ? (
