@@ -13,8 +13,9 @@ const DetailData = () => {
     return (
         <div className={styles.detail_data}>
             <div className={styles.detail_back_container}>
-                <Button className={styles.detail_back_button}>
-                    <MdKeyboardReturn/>BACK
+                <Button className={styles.detail_back_button} color="default" variant="outlined"
+                style={{fontSize: "36px"}}>
+                    BACK<MdKeyboardReturn/>
                 </Button>
             </div>
             {detailData && detailData.map(detail =>
