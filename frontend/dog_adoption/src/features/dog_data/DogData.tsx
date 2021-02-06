@@ -11,8 +11,15 @@ import {Link} from "react-router-dom";
 // 各保護犬データの一覧表示
 const DogData: React.FC<PROPS_DATA> = ({
                                            dataId,
+                                           loginId,
                                            dogName,
                                            gender,
+                                           age,
+                                           height,
+                                           observations,
+                                           color,
+                                           hair,
+                                           reason_for_arrival,
                                            photo,
                                            procedure,
                                            companyPost,
@@ -22,10 +29,14 @@ const DogData: React.FC<PROPS_DATA> = ({
     const prof = profiles.filter((prof) => {
         return prof.accountProfile === companyPost;
     });
+    const packet = {
+        dataId, loginId, dogName, gender, age, height, observations,
+        color, hair, reason_for_arrival, photo, procedure, companyPost,
+    }
 
     if (dogName) {
         return (
-            <Link to={{pathname: `/${dataId}`}} className={styles.core_link}>
+            <Link to={{pathname: `/${dataId}`, state: {detail: packet}}} className={styles.core_link}>
                 <div className={styles.dog_data}>
                     <img className={styles.dog_data_image} src={photo} alt=""/>
                     <div className={styles.dog_data_name_container}>

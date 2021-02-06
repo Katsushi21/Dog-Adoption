@@ -9,6 +9,7 @@ import {Button} from "@material-ui/core";
 const DetailData = () => {
     const {id} = useParams();
     const detailData = useSelector(selectData);
+    const {state: {detail}} = useLocation();
 
     return (
         <div className={styles.detail_data}>
@@ -17,6 +18,9 @@ const DetailData = () => {
                 style={{fontSize: "36px"}}>
                     BACK<MdKeyboardReturn/>
                 </Button>
+            </div>
+            <div>
+                {detail.companyPost}
             </div>
             {detailData && detailData.map(detail =>
                 // eslint-disable-next-line eqeqeq
