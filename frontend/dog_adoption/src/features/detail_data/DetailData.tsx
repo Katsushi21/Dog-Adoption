@@ -1,5 +1,5 @@
 import React from "react";
-import {useParams} from "react-router-dom";
+import {useParams, useLocation} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {selectData, toCharUppercase} from "../dog_data/dog_dataSlice";
 import {IoFemale, IoMale, MdKeyboardReturn} from "react-icons/all";

@@ -36,7 +36,7 @@ const Core: React.FC = () => {
                             .reverse()
                             .map((data) =>
                                 <Grid key={data.id} item xs={12} md={4}>
-                                    <Link to={`/${data.id}`} className={styles.core_link}>
+                                    <Link to={{pathname: `/${data.id}`, state: {detail: data}}} className={styles.core_link}>
                                         <DogData
                                             dataId={data.id}
                                             loginId={profile.accountProfile}
