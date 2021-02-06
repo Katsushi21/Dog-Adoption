@@ -36,7 +36,6 @@ const Core: React.FC = () => {
                             .reverse()
                             .map((data) =>
                                 <Grid key={data.id} item xs={12} md={4}>
-                                    <Link to={`/${data.id}`} className={styles.core_link}>
                                         <DogData
                                             dataId={data.id}
                                             loginId={profile.accountProfile}
@@ -51,8 +50,8 @@ const Core: React.FC = () => {
                                             photo={data.photo}
                                             procedure={data.procedure}
                                             companyPost={data.companyPost}
+                                            registered_at={data.registered_at}
                                         />
-                                    </Link>
                                 </Grid>
                             )}
                     </Grid>
