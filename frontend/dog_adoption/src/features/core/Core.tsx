@@ -15,8 +15,8 @@ const Core: React.FC = () => {
 
     // ページネーションに関する記述
     const [pageNumber, setPageNumber] = useState(0);
-    const dataPerPage = 12;
-    const marginPagesDisplayed = 12;
+    const dataPerPage = 9;
+    const marginPagesDisplayed = 9;
     const pageRangeDisplayed = 3;
     const pagesVisited = pageNumber * dataPerPage;
     const dataCount = Math.ceil(some_data.length / dataPerPage);
