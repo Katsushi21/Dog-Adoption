@@ -51,4 +51,5 @@ export interface PROPS_DATA {
     photo: string;
     procedure: string
     companyPost: number;
+    registered_at: string
 }

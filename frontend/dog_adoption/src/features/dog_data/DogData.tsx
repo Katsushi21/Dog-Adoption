@@ -23,6 +23,7 @@ const DogData: React.FC<PROPS_DATA> = ({
                                            photo,
                                            procedure,
                                            companyPost,
+                                           registered_at,
                                        }) => {
 
     const profiles = useSelector(selectProfiles);
@@ -31,7 +32,7 @@ const DogData: React.FC<PROPS_DATA> = ({
     });
     const packet = {
         dataId, loginId, dogName, gender, age, height, observations,
-        color, hair, reason_for_arrival, photo, procedure, companyPost,
+        color, hair, reason_for_arrival, photo, procedure, companyPost, registered_at
     }
 
     if (dogName) {

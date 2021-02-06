@@ -50,6 +50,7 @@ const Core: React.FC = () => {
                                             photo={data.photo}
                                             procedure={data.procedure}
                                             companyPost={data.companyPost}
+                                            registered_at={data.registered_at}
                                         />
                                 </Grid>
                             )}
