@@ -1,7 +1,5 @@
 import React from "react";
 import styles from "./DogData.module.css"
-import {useSelector} from "react-redux";
-import {selectProfiles} from "../auth/authSlice";
 import {PROPS_DATA} from "../types";
 import {IoFemale, IoMale} from "react-icons/all";
 import {toCharUppercase} from "./dog_dataSlice";
@@ -26,10 +24,6 @@ const DogData: React.FC<PROPS_DATA> = ({
                                            registered_at,
                                        }) => {
 
-    const profiles = useSelector(selectProfiles);
-    const prof = profiles.filter((prof) => {
-        return prof.accountProfile === companyPost;
-    });
     const packet = {
         dataId, loginId, dogName, gender, age, height, observations,
         color, hair, reason_for_arrival, photo, procedure, companyPost, registered_at
