@@ -134,3 +134,17 @@
     border: none;
     outline: none;
 }
+
+.detail_button_container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.detail_button_left {
+
+}
+
+.detail_button_left {
+
+}
