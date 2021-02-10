@@ -5,7 +5,7 @@ import {IoFemale, IoMale, MdKeyboardReturn} from "react-icons/all";
 import styles from "./DetailData.module.css";
 import {Avatar, Button} from "@material-ui/core";
 import {useSelector} from "react-redux";
-import {selectProfiles} from "../auth/authSlice";
+import {selectProfile, selectProfiles} from "../auth/authSlice";
 
 const DetailData = () => {
     const {state: {detail}} = useLocation();
@@ -13,7 +13,7 @@ const DetailData = () => {
     const prof = profiles.filter((prof) => {
         return prof.accountProfile === detail.companyPost;
     });
-    console.log(useLocation())
+    const profile = useSelector(selectProfile);
 
     return (
         <div className={styles.detail_data}>
@@ -107,7 +107,7 @@ const DetailData = () => {
                         </li>
                         <li className={styles.detail_table}>
                             <div className={styles.detail_table_type}>
-                                 During dealing :
+                                During dealing :
                             </div>
                             <div className={styles.detail_table_value}>
                                 {detail.registered_at}
@@ -115,6 +115,32 @@ const DetailData = () => {
                         </li>
                     </ul>
                 </div>
+            </div>
+            <div className={styles.detail_button_container}>
+                {profile.accountType === "company" && profile.accountProfile === detail.companyPost ?
+                    <>
+                        <Button variant="contained" color="primary">
+                            Edit
+                        </Button>
+                        <Button variant="contained" color="secondary">
+                            Delete
+                        </Button>
+                    </>
+                    :
+                    null
+                }
+                {profile.accountType === "ordinary" && detail.procedure === "no" ?
+                    <>
+                        <Button variant="contained" color="primary">
+                            Donate
+                        </Button>
+                        <Button variant="contained" color="secondary">
+                            Adopt
+                        </Button>
+                    </>
+                    :
+                    null
+                }
             </div>
         </div>
     );
