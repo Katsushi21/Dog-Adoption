@@ -13,7 +13,6 @@ const DetailData = () => {
     const prof = profiles.filter((prof) => {
         return prof.accountProfile === detail.companyPost;
     });
-    console.log(useLocation())
 
     return (
         <div className={styles.detail_data}>
