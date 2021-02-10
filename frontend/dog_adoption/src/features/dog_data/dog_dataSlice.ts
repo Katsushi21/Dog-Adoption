@@ -121,6 +121,11 @@ export const dog_dataSlice = createSlice({
                 ...state, data: [...state.data, action.payload],
             };
         });
+        builder.addCase(fetchAsyncGetDetail.fulfilled, (state, action) => {
+            return {
+                ...state, detail: action.payload,
+            };
+        });
     },
 });
 
@@ -131,6 +136,7 @@ export const {
 export const selectIsLoadingData = (state: RootState) => state.dog_data.isLoadingData;
 export const selectOpenNewData = (state: RootState) => state.dog_data.openNewData;
 export const selectData = (state: RootState) => state.dog_data.data;
+export const selectDetail = (state:RootState) => state.dog_data.detail;
 
 export const toCharUppercase = (dogName: string) => dogName.toUpperCase();
 
