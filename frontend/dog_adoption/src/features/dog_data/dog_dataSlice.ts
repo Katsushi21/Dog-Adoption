@@ -1,7 +1,7 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import {RootState} from '../../app/store';
 import axios from "axios";
-import {PROPS_NEWDATA, PROPS_DATA} from "../types";
+import {PROPS_NEWDATA} from "../types";
 
 const adoptionUrlData = `${process.env.REACT_APP_DEV_ADOPTION_URL}adoption/dog_data/`;
 
@@ -39,17 +39,16 @@ export const fetchAsyncNewData = createAsyncThunk("dog_data/post",
         return res.data;
     });
 
-//特定の保護犬のデータを取得する記述
-export const fetchAsyncGetDetail = createAsyncThunk("detail/get",
-    async () => {
-        const res = await axios.get(adoptionUrlData, {
+//保護犬のデータを削除する機能
+export const fetchAsyncDeleteData = createAsyncThunk("dog_data/delete",
+    async (id) => {
+        const res = await axios.delete(`${adoptionUrlData}/${id}`, {
             headers: {
                 "Authorization": `JWT ${localStorage.localJWT}`,
-            },
+            }
         });
         return res.data;
     });
-
 
 export const dog_dataSlice = createSlice({
     name: "dog_data",
@@ -75,22 +74,6 @@ export const dog_dataSlice = createSlice({
                 updated_at: "",
             },
         ],
-        detail: {
-            id: 0,
-            dogName: "",
-            gender: "",
-            age: "",
-            height: "",
-            observations: "",
-            color: "",
-            hair: "",
-            reason_for_arrival: "",
-            photo: "",
-            procedure: "",
-            companyPost: 0,
-            registered_at: "",
-            updated_at: "",
-        }
     },
     reducers: {
         fetchDataStart(state) {
@@ -121,11 +104,6 @@ export const dog_dataSlice = createSlice({
                 ...state, data: [...state.data, action.payload],
             };
         });
-        builder.addCase(fetchAsyncGetDetail.fulfilled, (state, action) => {
-            return {
-                ...state, detail: action.payload,
-            };
-        });
     },
 });
 
@@ -136,7 +114,6 @@ export const {
 export const selectIsLoadingData = (state: RootState) => state.dog_data.isLoadingData;
 export const selectOpenNewData = (state: RootState) => state.dog_data.openNewData;
 export const selectData = (state: RootState) => state.dog_data.data;
-export const selectDetail = (state:RootState) => state.dog_data.detail;
 
 export const toCharUppercase = (dogName: string) => dogName.toUpperCase();
 
