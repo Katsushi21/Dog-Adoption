@@ -41,8 +41,8 @@ export const fetchAsyncNewData = createAsyncThunk("dog_data/post",
 
 //特定の保護犬のデータを取得する記述
 export const fetchAsyncGetDetail = createAsyncThunk("detail/get",
-    async (detail: PROPS_DATA) => {
-        const res = await axios.get(`adoptionUrlData/${detail.dataId}`, {
+    async () => {
+        const res = await axios.get(adoptionUrlData, {
             headers: {
                 "Authorization": `JWT ${localStorage.localJWT}`,
             },
