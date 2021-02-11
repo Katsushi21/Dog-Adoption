@@ -4,11 +4,13 @@ import {toCharUppercase} from "../dog_data/dog_dataSlice";
 import {IoFemale, IoMale, MdKeyboardReturn} from "react-icons/all";
 import styles from "./DetailData.module.css";
 import {Avatar, Button} from "@material-ui/core";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {selectProfile, selectProfiles} from "../auth/authSlice";
 import {fetchAsyncDeleteData} from "../dog_data/dog_dataSlice"
+import {AppDispatch} from "../../app/store";
 
 const DetailData = () => {
+    const dispatch: AppDispatch = useDispatch();
     const {state: {detail}} = useLocation();
     const profiles = useSelector(selectProfiles);
     const prof = profiles.filter((prof) => {

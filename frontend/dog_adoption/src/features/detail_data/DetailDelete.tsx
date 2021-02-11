@@ -5,7 +5,16 @@ import {AppDispatch} from "../../app/store";
 import {fetchAsyncDeleteData} from "../dog_data/dog_dataSlice";
 
 
-export const DeleteData = () => {
+const DeleteData: React.FC = () => {
     const dispatch: AppDispatch = useDispatch();
     const profile = useSelector(selectProfile);
+
+
+    return (
+        <div>
+
+        </div>
+    )
 }
+
+export default DeleteData;
