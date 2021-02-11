@@ -104,7 +104,10 @@ export const dog_dataSlice = createSlice({
                 ...state, data: [...state.data, action.payload],
             };
         });
-
+        builder.addCase(fetchAsyncDeleteData.fulfilled, (state, action) => {
+            delete state.data[action.payload]
+            return state
+        });
     },
 });
 
