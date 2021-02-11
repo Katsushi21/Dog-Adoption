@@ -42,7 +42,7 @@ export const fetchAsyncNewData = createAsyncThunk("dog_data/post",
 //保護犬のデータを削除する機能
 export const fetchAsyncDeleteData = createAsyncThunk("dog_data/delete",
     async (id: any) => {
-        const res = await axios.delete(`${adoptionUrlData}/${id}`, {
+        const res = await axios.delete(`${adoptionUrlData}${id}/`, {
             headers: {
                 "Authorization": `JWT ${localStorage.localJWT}`,
             }
