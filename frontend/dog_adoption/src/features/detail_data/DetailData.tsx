@@ -1,19 +1,29 @@
 import React from "react";
 import {useLocation} from "react-router-dom";
-import {toCharUppercase} from "../dog_data/dog_dataSlice";
+import {fetchDataEnd, fetchDataStart, toCharUppercase} from "../dog_data/dog_dataSlice";
 import {IoFemale, IoMale, MdKeyboardReturn} from "react-icons/all";
 import styles from "./DetailData.module.css";
 import {Avatar, Button} from "@material-ui/core";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {selectProfile, selectProfiles} from "../auth/authSlice";
+import {fetchAsyncDeleteData} from "../dog_data/dog_dataSlice"
+import {AppDispatch} from "../../app/store";
 
 const DetailData = () => {
+    const dispatch: AppDispatch = useDispatch();
     const {state: {detail}} = useLocation();
     const profiles = useSelector(selectProfiles);
     const prof = profiles.filter((prof) => {
         return prof.accountProfile === detail.companyPost;
     });
     const profile = useSelector(selectProfile);
+
+    const deleteData = async (e: React.MouseEvent<HTMLElement>) => {
+        e.preventDefault();
+        await dispatch(fetchDataStart());
+        await dispatch(fetchAsyncDeleteData(detail.dataId));
+        await dispatch(fetchDataEnd());
+    }
 
     return (
         <div className={styles.detail_data}>
@@ -122,7 +132,8 @@ const DetailData = () => {
                         <Button variant="contained" color="primary">
                             Edit
                         </Button>
-                        <Button variant="contained" color="secondary">
+                        <Button variant="contained" color="secondary"
+                                onClick={deleteData}>
                             Delete
                         </Button>
                     </>
@@ -146,4 +157,4 @@ const DetailData = () => {
     );
 };
 
-export default DetailData
+export default DetailData;

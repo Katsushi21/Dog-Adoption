@@ -15,11 +15,9 @@ const customStyles = {
     content: {
         top: "55%",
         left: "50%",
-
         width: 280,
         height: 250,
         padding: "50px",
-
         transform: "translate(-50%, -50%)",
     },
 };

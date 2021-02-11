@@ -9,7 +9,7 @@ import {
     fetchDataEnd,
     fetchAsyncNewData,
     resetOpenNewData,
-    selectOpenNewData
+    selectOpenNewData,
 } from "../dog_data/dog_dataSlice";
 
 import {
