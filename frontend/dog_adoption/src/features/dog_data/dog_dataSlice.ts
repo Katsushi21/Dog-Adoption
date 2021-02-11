@@ -41,7 +41,7 @@ export const fetchAsyncNewData = createAsyncThunk("dog_data/post",
 
 //保護犬のデータを削除する機能
 export const fetchAsyncDeleteData = createAsyncThunk("dog_data/delete",
-    async (id) => {
+    async (id: any) => {
         const res = await axios.delete(`${adoptionUrlData}/${id}`, {
             headers: {
                 "Authorization": `JWT ${localStorage.localJWT}`,
@@ -104,11 +104,12 @@ export const dog_dataSlice = createSlice({
                 ...state, data: [...state.data, action.payload],
             };
         });
+
     },
 });
 
 export const {
-    fetchDataStart, fetchDataEnd, setOpenNewData, resetOpenNewData
+    fetchDataStart, fetchDataEnd, setOpenNewData, resetOpenNewData,
 } = dog_dataSlice.actions;
 
 export const selectIsLoadingData = (state: RootState) => state.dog_data.isLoadingData;

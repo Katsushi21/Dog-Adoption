@@ -6,6 +6,7 @@ import styles from "./DetailData.module.css";
 import {Avatar, Button} from "@material-ui/core";
 import {useSelector} from "react-redux";
 import {selectProfile, selectProfiles} from "../auth/authSlice";
+import {fetchAsyncDeleteData} from "../dog_data/dog_dataSlice"
 
 const DetailData = () => {
     const {state: {detail}} = useLocation();
@@ -122,7 +123,8 @@ const DetailData = () => {
                         <Button variant="contained" color="primary">
                             Edit
                         </Button>
-                        <Button variant="contained" color="secondary">
+                        <Button variant="contained" color="secondary"
+                                onClick={() => fetchAsyncDeleteData(detail.dataId)}>
                             Delete
                         </Button>
                     </>
