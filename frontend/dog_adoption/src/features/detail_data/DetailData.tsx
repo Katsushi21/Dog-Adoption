@@ -1,6 +1,6 @@
 import React from "react";
 import {useLocation} from "react-router-dom";
-import {fetchAsyncNewData, fetchDataEnd, fetchDataStart, toCharUppercase} from "../dog_data/dog_dataSlice";
+import {fetchDataEnd, fetchDataStart, toCharUppercase} from "../dog_data/dog_dataSlice";
 import {IoFemale, IoMale, MdKeyboardReturn} from "react-icons/all";
 import styles from "./DetailData.module.css";
 import {Avatar, Button} from "@material-ui/core";
