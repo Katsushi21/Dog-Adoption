@@ -53,3 +53,16 @@ export interface PROPS_DATA {
     companyPost: number;
     registered_at: string
 }
+
+export interface PROPS_EDITDATA {
+    dataId: number;
+    dogName: string;
+    gender: string;
+    age: string;
+    height: string;
+    observations: string;
+    color: string;
+    hair: string;
+    reason_for_arrival: string;
+    photo: File | null;
+}
