@@ -1,39 +1,45 @@
 import React, {useState} from "react";
 import Modal from "react-modal";
-import {useSelector, useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {AppDispatch} from "../../app/store";
-import styles from "./Core.module.css";
+import styles from "../../features/core/Core.module.css";
 import {File} from "../types";
 import {
-    fetchDataStart,
-    fetchDataEnd,
-    resetOpenEditData,
-    selectOpenEditData,
     fetchAsyncUpdateData,
+    fetchDataEnd,
+    fetchDataStart,
+    resetOpenEditData,
+    selectData,
+    selectOpenEditData,
 } from "../dog_data/dog_dataSlice";
 import {useParams} from "react-router-dom";
 
-import {
-    Button, TextField, IconButton
-} from "@material-ui/core";
+import {Button, IconButton, TextField} from "@material-ui/core";
 import {MdAddAPhoto} from "react-icons/md";
 
 const customStyles = {
     content: {
         top: "55%",
         left: "50%",
-        width: 280,
-        height: 250,
+        width: 350,
+        height: 440,
         padding: "50px",
         transform: "translate(-50%, -50%)",
     },
 };
 
 
-const EditData: React.FC = () => {
+const EditData: React.FC = (props) => {
     const dispatch: AppDispatch = useDispatch();
     const openEditData = useSelector(selectOpenEditData);
+
     const {id} = useParams();
+    console.log(id);
+    const allData = useSelector(selectData);
+
+    const record = props;
+
+
     const [name, setName] = useState("");
     const [gender, setGender] = useState("");
     const [age, setAge] = useState("");
@@ -47,24 +53,16 @@ const EditData: React.FC = () => {
         const fileInput = document.getElementById("imageInput")
         fileInput?.click();
     };
+
     const editData = async (e: React.MouseEvent<HTMLElement>) => {
         e.preventDefault();
         const packet = {
-            dataId: {id}, dogName: name, gender: gender, age: age, height: height, observations: observations,
+            dataId: id, dogName: name, gender: gender, age: age, height: height, observations: observations,
             color: color, hair: hair, reason_for_arrival: reason, photo: image
         };
         await dispatch(fetchDataStart());
         await dispatch(fetchAsyncUpdateData(packet));
         await dispatch(fetchDataEnd());
-        setName("");
-        setGender("")
-        setAge("")
-        setHeight("")
-        setObservations("")
-        setColor("")
-        setHair("")
-        setReason("")
-        setImage(null);
         dispatch(resetOpenEditData());
     };
 
@@ -80,7 +78,7 @@ const EditData: React.FC = () => {
                    }}
                    style={customStyles}>
                 <form className={styles.core_signUp}>
-                    <h1 className={styles.core_title}>Dog Data</h1>
+                    <h1 className={styles.core_title}>Update Data</h1>
                     <br/>
                     {/*名前を入力*/}
                     <TextField
@@ -176,12 +174,11 @@ const EditData: React.FC = () => {
                     </IconButton>
                     <br/>
                     <Button
-                        disabled={!name || !image}
                         variant="contained"
                         color="primary"
                         onClick={editData}
                     >
-                        Registration
+                        Update
                     </Button>
                 </form>
             </Modal>

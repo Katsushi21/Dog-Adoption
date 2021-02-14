@@ -23,7 +23,7 @@ import {
 } from "../auth/authSlice";
 
 import {
-    setOpenNewData, resetOpenNewData, fetchAsyncGetData, selectIsLoadingData
+    setOpenNewData, resetOpenNewData, fetchAsyncGetData, selectIsLoadingData, resetOpenEditData
 } from "../dog_data/dog_dataSlice";
 
 import EditProfile from "./EditProfile";
@@ -97,6 +97,7 @@ const Navigation: React.FC = () => {
                                     onClick={() => {
                                         dispatch(setOpenNewData());
                                         dispatch(resetOpenProfile());
+                                        dispatch(resetOpenEditData());
                                     }}
                             >
                                 <SiDatadog/>
@@ -119,6 +120,7 @@ const Navigation: React.FC = () => {
                                     onClick={() => {
                                         dispatch(setOpenProfile());
                                         dispatch(resetOpenNewData());
+                                        dispatch(resetOpenEditData());
                                     }}
                             >
                                 <StyledBadge
