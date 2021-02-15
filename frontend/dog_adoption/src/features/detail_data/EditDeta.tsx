@@ -29,16 +29,13 @@ const customStyles = {
 };
 
 
-const EditData: React.FC = (props) => {
+const EditData: React.FC = () => {
     const dispatch: AppDispatch = useDispatch();
     const openEditData = useSelector(selectOpenEditData);
 
     const {id} = useParams();
-    console.log(id);
-    const allData = useSelector(selectData);
-
-    const record = props;
-
+    // eslint-disable-next-line eqeqeq
+    const preData = useSelector(selectData).find(e => e.id == id);
 
     const [name, setName] = useState("");
     const [gender, setGender] = useState("");
@@ -84,6 +81,7 @@ const EditData: React.FC = (props) => {
                     <TextField
                         placeholder="Please enter the dog's name"
                         type="text"
+                        value={preData?.dogName}
                         onChange={(e) => setName(e.target.value)}
                     />
                     <br/>
