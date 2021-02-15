@@ -100,48 +100,26 @@ export const dog_dataSlice = createSlice({
                 updated_at: "",
             },
         ],
-        detail:
-            {
-                id: 0,
-                dogName: "",
-                gender: "",
-                age: "",
-                height: "",
-                observations: "",
-                color: "",
-                hair: "",
-                reason_for_arrival: "",
-                photo: "",
-                procedure: "",
-                companyPost: 0,
-                registered_at: "",
-                updated_at: "",
-            },
     },
     reducers: {
         fetchDataStart(state) {
             state.isLoadingData = true;
-        }
-        ,
+        },
         fetchDataEnd(state) {
             state.isLoadingData = false;
-        }
-        ,
+        },
         setOpenNewData(state) {
             state.openNewData = true;
-        }
-        ,
+        },
         resetOpenNewData(state) {
             state.openNewData = false;
-        }
-        ,
+        },
         setOpenEditData(state) {
             state.openEditData = true;
-        }
-        ,
+        },
         resetOpenEditData(state) {
             state.openEditData = false;
-        }
+        },
     },
 
     extraReducers: (builder) => {

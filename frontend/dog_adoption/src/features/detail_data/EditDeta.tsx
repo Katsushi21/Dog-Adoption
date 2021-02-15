@@ -105,6 +105,7 @@ const EditData: React.FC = () => {
                         type="number"
                         min="0"
                         max="20"
+                        value={preData?.age}
                         onChange={(e) => setAge(e.target.value)}
                     />
                     <br/>
@@ -115,6 +116,7 @@ const EditData: React.FC = () => {
                         type="number"
                         min="0"
                         max="200"
+                        value={preData?.height}
                         onChange={(e) => setHeight(e.target.value)}
                     />
                     <br/>
@@ -123,6 +125,7 @@ const EditData: React.FC = () => {
                     <TextField
                         placeholder="Please enter the dog's observations"
                         type="text"
+                        value={preData?.observations}
                         onChange={(e) => setObservations(e.target.value)}
                     />
                     <br/>
@@ -131,6 +134,7 @@ const EditData: React.FC = () => {
                     <TextField
                         placeholder="Please enter the dog's color"
                         type="text"
+                        value={preData?.color}
                         onChange={(e) => setColor(e.target.value)}
                     />
                     <br/>
@@ -154,6 +158,7 @@ const EditData: React.FC = () => {
                     <TextField
                         placeholder="Please enter the dog's reason for arrival"
                         type="text"
+                        value={preData?.reason_for_arrival}
                         onChange={(e) => setReason(e.target.value)}
                     />
                     <br/>
