@@ -37,30 +37,30 @@ const EditData: React.FC = () => {
     // eslint-disable-next-line eqeqeq
     const preData = useSelector(selectData).find(e => e.id == id);
 
-    const [name, setName] = useState("");
-    const [gender, setGender] = useState("");
-    const [age, setAge] = useState("");
-    const [height, setHeight] = useState("");
-    const [observations, setObservations] = useState("");
-    const [color, setColor] = useState("");
-    const [hair, setHair] = useState("");
-    const [reason, setReason] = useState("");
+    const [name, setName] = useState(`${preData?.dogName}`);
+    const [gender, setGender] = useState(`${preData?.gender}`);
+    const [age, setAge] = useState(`${preData?.age}`);
+    const [height, setHeight] = useState(`${preData?.height}`);
+    const [observations, setObservations] = useState(`${preData?.observations}`);
+    const [color, setColor] = useState(`${preData?.color}`);
+    const [hair, setHair] = useState(`${preData?.hair}`);
+    const [reason, setReason] = useState(`${preData?.reason_for_arrival}`);
     const [image, setImage] = useState<File | null>(null);
     const handlerEditPicture = () => {
         const fileInput = document.getElementById("imageInput")
         fileInput?.click();
     };
 
-    const editData = async (e: React.MouseEvent<HTMLElement>) => {
+    const updateData = async (e: React.MouseEvent<HTMLElement>) => {
         e.preventDefault();
         const packet = {
             dataId: id, dogName: name, gender: gender, age: age, height: height, observations: observations,
-            color: color, hair: hair, reason_for_arrival: reason, photo: image
+            color: color, hair: hair, reason_for_arrival: reason, photo: image, procedure: "no"
         };
         await dispatch(fetchDataStart());
         await dispatch(fetchAsyncUpdateData(packet));
         await dispatch(fetchDataEnd());
-        dispatch(resetOpenEditData());
+        await dispatch(resetOpenEditData());
     };
 
     const genderOption = [{value: "male", label: "Male"}, {value: "female", label: "Female"}];
@@ -81,7 +81,7 @@ const EditData: React.FC = () => {
                     <TextField
                         placeholder="Please enter the dog's name"
                         type="text"
-                        value={preData?.dogName}
+                        defaultValue={preData?.dogName}
                         onChange={(e) => setName(e.target.value)}
                     />
                     <br/>
@@ -105,7 +105,7 @@ const EditData: React.FC = () => {
                         type="number"
                         min="0"
                         max="20"
-                        value={preData?.age}
+                        defaultValue={preData?.age}
                         onChange={(e) => setAge(e.target.value)}
                     />
                     <br/>
@@ -116,7 +116,7 @@ const EditData: React.FC = () => {
                         type="number"
                         min="0"
                         max="200"
-                        value={preData?.height}
+                        defaultValue={preData?.height}
                         onChange={(e) => setHeight(e.target.value)}
                     />
                     <br/>
@@ -125,7 +125,7 @@ const EditData: React.FC = () => {
                     <TextField
                         placeholder="Please enter the dog's observations"
                         type="text"
-                        value={preData?.observations}
+                        defaultValue={preData?.observations}
                         onChange={(e) => setObservations(e.target.value)}
                     />
                     <br/>
@@ -134,7 +134,7 @@ const EditData: React.FC = () => {
                     <TextField
                         placeholder="Please enter the dog's color"
                         type="text"
-                        value={preData?.color}
+                        defaultValue={preData?.color}
                         onChange={(e) => setColor(e.target.value)}
                     />
                     <br/>
@@ -158,7 +158,7 @@ const EditData: React.FC = () => {
                     <TextField
                         placeholder="Please enter the dog's reason for arrival"
                         type="text"
-                        value={preData?.reason_for_arrival}
+                        defaultValue={preData?.reason_for_arrival}
                         onChange={(e) => setReason(e.target.value)}
                     />
                     <br/>
@@ -179,7 +179,7 @@ const EditData: React.FC = () => {
                     <Button
                         variant="contained"
                         color="primary"
-                        onClick={editData}
+                        onClick={updateData}
                     >
                         Update
                     </Button>

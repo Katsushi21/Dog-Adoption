@@ -65,4 +65,5 @@ export interface PROPS_EDITDATA {
     hair: string;
     reason_for_arrival: string;
     photo: File | null;
+    procedure: string
 }

@@ -2,7 +2,6 @@ import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import {RootState} from '../../app/store';
 import axios from "axios";
 import {PROPS_NEWDATA, PROPS_EDITDATA} from "../types";
-import {fetchAsyncUpdateProfile} from "../auth/authSlice";
 
 const adoptionUrlData = `${process.env.REACT_APP_DEV_ADOPTION_URL}adoption/dog_data/`;
 
@@ -63,6 +62,7 @@ export const fetchAsyncUpdateData = createAsyncThunk("dog_data/put",
         updateData.append("color", putData.color);
         updateData.append("hair", putData.hair);
         updateData.append("reason_for_arrival", putData.reason_for_arrival);
+        updateData.append("procedure", "no");
         putData.photo && updateData.append("photo", putData.photo, putData.photo.name);
         const res = await axios.put(
             `${adoptionUrlData}${putData.dataId}/`, updateData, {
@@ -137,7 +137,7 @@ export const dog_dataSlice = createSlice({
             delete state.data[action.payload]
             return state
         });
-        builder.addCase(fetchAsyncUpdateProfile.fulfilled, (state, action) => {
+        builder.addCase(fetchAsyncUpdateData.fulfilled, (state, action) => {
             state.data = state.data.map((input) =>
                 input.id === action.payload.id ? action.payload : input
             );
