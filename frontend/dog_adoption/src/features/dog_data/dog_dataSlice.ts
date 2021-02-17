@@ -100,6 +100,22 @@ export const dog_dataSlice = createSlice({
                 updated_at: "",
             },
         ],
+        detail: {
+            id: 0,
+            dogName: "",
+            gender: "",
+            age: "",
+            height: "",
+            observations: "",
+            color: "",
+            hair: "",
+            reason_for_arrival: "",
+            photo: "",
+            procedure: "",
+            companyPost: 0,
+            registered_at: "",
+            updated_at: "",
+        }
     },
     reducers: {
         fetchDataStart(state) {
@@ -119,6 +135,9 @@ export const dog_dataSlice = createSlice({
         },
         resetOpenEditData(state) {
             state.openEditData = false;
+        },
+        setDetailData: (state, action) => {
+            state.detail = action.payload;
         },
     },
 
@@ -146,13 +165,14 @@ export const dog_dataSlice = createSlice({
 });
 
 export const {
-    fetchDataStart, fetchDataEnd, setOpenNewData, resetOpenNewData, setOpenEditData, resetOpenEditData
+    fetchDataStart, fetchDataEnd, setOpenNewData, resetOpenNewData, setOpenEditData, resetOpenEditData, setDetailData
 } = dog_dataSlice.actions;
 
 export const selectIsLoadingData = (state: RootState) => state.dog_data.isLoadingData;
 export const selectOpenNewData = (state: RootState) => state.dog_data.openNewData;
 export const selectOpenEditData = (state: RootState) => state.dog_data.openEditData;
 export const selectData = (state: RootState) => state.dog_data.data;
+export const selectDetail = (state: RootState) => state.dog_data.detail;
 export const toCharUppercase = (dogName: string) => dogName.toUpperCase();
 
 export default dog_dataSlice.reducer;
