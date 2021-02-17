@@ -9,7 +9,7 @@ import {
     fetchDataEnd,
     fetchDataStart,
     resetOpenEditData,
-    selectData,
+    selectDetailData,
     selectOpenEditData,
 } from "../dog_data/dog_dataSlice";
 import {useParams} from "react-router-dom";
@@ -32,19 +32,18 @@ const customStyles = {
 const EditData: React.FC = () => {
     const dispatch: AppDispatch = useDispatch();
     const openEditData = useSelector(selectOpenEditData);
-
-    const {id} = useParams();
+    const {id} = useParams()
     // eslint-disable-next-line eqeqeq
-    const preData = useSelector(selectData).find(e => e.id == id);
+    const detail = useSelector(selectDetailData)
 
-    const [name, setName] = useState(`${preData?.dogName}`);
-    const [gender, setGender] = useState(`${preData?.gender}`);
-    const [age, setAge] = useState(`${preData?.age}`);
-    const [height, setHeight] = useState(`${preData?.height}`);
-    const [observations, setObservations] = useState(`${preData?.observations}`);
-    const [color, setColor] = useState(`${preData?.color}`);
-    const [hair, setHair] = useState(`${preData?.hair}`);
-    const [reason, setReason] = useState(`${preData?.reason_for_arrival}`);
+    const [name, setName] = useState(`${detail?.dogName}`);
+    const [gender, setGender] = useState(`${detail?.gender}`);
+    const [age, setAge] = useState(`${detail?.age}`);
+    const [height, setHeight] = useState(`${detail?.height}`);
+    const [observations, setObservations] = useState(`${detail?.observations}`);
+    const [color, setColor] = useState(`${detail?.color}`);
+    const [hair, setHair] = useState(`${detail?.hair}`);
+    const [reason, setReason] = useState(`${detail?.reason_for_arrival}`);
     const [image, setImage] = useState<File | null>(null);
     const handlerEditPicture = () => {
         const fileInput = document.getElementById("imageInput")
@@ -81,7 +80,7 @@ const EditData: React.FC = () => {
                     <TextField
                         placeholder="Please enter the dog's name"
                         type="text"
-                        defaultValue={preData?.dogName}
+                        defaultValue={detail?.dogName}
                         onChange={(e) => setName(e.target.value)}
                     />
                     <br/>
@@ -105,7 +104,7 @@ const EditData: React.FC = () => {
                         type="number"
                         min="0"
                         max="20"
-                        defaultValue={preData?.age}
+                        defaultValue={detail?.age}
                         onChange={(e) => setAge(e.target.value)}
                     />
                     <br/>
@@ -116,7 +115,7 @@ const EditData: React.FC = () => {
                         type="number"
                         min="0"
                         max="200"
-                        defaultValue={preData?.height}
+                        defaultValue={detail?.height}
                         onChange={(e) => setHeight(e.target.value)}
                     />
                     <br/>
@@ -125,7 +124,7 @@ const EditData: React.FC = () => {
                     <TextField
                         placeholder="Please enter the dog's observations"
                         type="text"
-                        defaultValue={preData?.observations}
+                        defaultValue={detail?.observations}
                         onChange={(e) => setObservations(e.target.value)}
                     />
                     <br/>
@@ -134,7 +133,7 @@ const EditData: React.FC = () => {
                     <TextField
                         placeholder="Please enter the dog's color"
                         type="text"
-                        defaultValue={preData?.color}
+                        defaultValue={detail?.color}
                         onChange={(e) => setColor(e.target.value)}
                     />
                     <br/>
@@ -158,7 +157,7 @@ const EditData: React.FC = () => {
                     <TextField
                         placeholder="Please enter the dog's reason for arrival"
                         type="text"
-                        defaultValue={preData?.reason_for_arrival}
+                        defaultValue={detail?.reason_for_arrival}
                         onChange={(e) => setReason(e.target.value)}
                     />
                     <br/>

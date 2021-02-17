@@ -1,19 +1,22 @@
-import React, {useState} from "react";
-import {useLocation} from "react-router-dom";
+import React from "react";
+import {useParams} from "react-router-dom";
 import {fetchDataEnd, fetchDataStart, toCharUppercase} from "../dog_data/dog_dataSlice";
 import {IoFemale, IoMale, MdKeyboardReturn} from "react-icons/all";
 import styles from "./DetailData.module.css";
 import {Avatar, Button} from "@material-ui/core";
 import {useDispatch, useSelector} from "react-redux";
 import {selectProfile, selectProfiles} from "../auth/authSlice";
-import {fetchAsyncDeleteData, setOpenEditData} from "../dog_data/dog_dataSlice"
+import {fetchAsyncDeleteData, setOpenEditData, selectDetailData} from "../dog_data/dog_dataSlice"
 import {AppDispatch} from "../../app/store";
+import {PROPS_DATA} from "../types"
 import EditData from "./EditDeta";
 
 
-const DetailData = () => {
+const DetailData: React.FC<PROPS_DATA> = () => {
     const dispatch: AppDispatch = useDispatch();
-    const {state: {detail}} = useLocation();
+    const {id} = useParams()
+    const detail = useSelector(selectDetailData)
+
     const profiles = useSelector(selectProfiles);
     const prof = profiles.filter((prof) => {
         return prof.accountProfile === detail.companyPost;
@@ -24,12 +27,9 @@ const DetailData = () => {
     const deleteData = async (e: React.MouseEvent<HTMLElement>) => {
         e.preventDefault();
         await dispatch(fetchDataStart());
-        await dispatch(fetchAsyncDeleteData(detail.dataId));
+        await dispatch(fetchAsyncDeleteData(id));
         await dispatch(fetchDataEnd());
     };
-
-    //データの更新に関する記述
-
 
     return (
         <div>
@@ -138,7 +138,7 @@ const DetailData = () => {
                     {profile.accountType === "company" && profile.accountProfile === detail.companyPost ?
                         <>
                             <Button variant="contained" color="primary"
-                                    onClick={() => {dispatch(setOpenEditData())}}>
+                                    onClick={() => dispatch(setOpenEditData())}>
                                 Edit
                             </Button>
                             <Button variant="contained" color="secondary"

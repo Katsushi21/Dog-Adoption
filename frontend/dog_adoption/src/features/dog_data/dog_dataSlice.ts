@@ -139,6 +139,20 @@ export const dog_dataSlice = createSlice({
         setDetailData: (state, action) => {
             state.detail = action.payload;
         },
+        setEditData: (state, action) => {
+          const edited = state.data.find((e) => e.id === action.payload.id)
+            if (edited) {
+                edited.dogName = action.payload.dogName;
+                edited.gender = action.payload.gender;
+                edited.age = action.payload.age;
+                edited.height = action.payload.height;
+                edited.observations = action.payload.observations;
+                edited.color = action.payload.color;
+                edited.hair = action.payload.hair;
+                edited.reason_for_arrival = action.payload.reason_for_arrival;
+                edited.photo = action.payload.photo;
+            }
+        },
     },
 
     extraReducers: (builder) => {
@@ -165,14 +179,15 @@ export const dog_dataSlice = createSlice({
 });
 
 export const {
-    fetchDataStart, fetchDataEnd, setOpenNewData, resetOpenNewData, setOpenEditData, resetOpenEditData, setDetailData
+    fetchDataStart, fetchDataEnd, setOpenNewData, resetOpenNewData, setOpenEditData, resetOpenEditData, setDetailData,
+    setEditData,
 } = dog_dataSlice.actions;
 
 export const selectIsLoadingData = (state: RootState) => state.dog_data.isLoadingData;
 export const selectOpenNewData = (state: RootState) => state.dog_data.openNewData;
 export const selectOpenEditData = (state: RootState) => state.dog_data.openEditData;
 export const selectData = (state: RootState) => state.dog_data.data;
-export const selectDetail = (state: RootState) => state.dog_data.detail;
+export const selectDetailData = (state: RootState) => state.dog_data.detail;
 export const toCharUppercase = (dogName: string) => dogName.toUpperCase();
 
 export default dog_dataSlice.reducer;
