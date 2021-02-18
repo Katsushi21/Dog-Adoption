@@ -16,6 +16,9 @@ const DetailData: React.FC<PROPS_DATA> = () => {
     const dispatch: AppDispatch = useDispatch();
     const {id} = useParams()
     const detail = useSelector(selectDetailData)
+    const serializedState = JSON.stringify(detail)
+    localStorage.setItem("Detail", serializedState);
+
 
     const profiles = useSelector(selectProfiles);
     const prof = profiles.filter((prof) => {
