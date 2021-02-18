@@ -36,14 +36,14 @@ const EditData: React.FC = () => {
     // eslint-disable-next-line eqeqeq
     const detail = useSelector(selectDetailData)
 
-    const [name, setName] = useState(`${detail?.dogName}`);
-    const [gender, setGender] = useState(`${detail?.gender}`);
-    const [age, setAge] = useState(`${detail?.age}`);
-    const [height, setHeight] = useState(`${detail?.height}`);
-    const [observations, setObservations] = useState(`${detail?.observations}`);
-    const [color, setColor] = useState(`${detail?.color}`);
-    const [hair, setHair] = useState(`${detail?.hair}`);
-    const [reason, setReason] = useState(`${detail?.reason_for_arrival}`);
+    const [name, setName] = useState(detail.dogName);
+    const [gender, setGender] = useState(detail.gender);
+    const [age, setAge] = useState(detail.age);
+    const [height, setHeight] = useState(detail.height);
+    const [observations, setObservations] = useState(detail.observations);
+    const [color, setColor] = useState(detail.color);
+    const [hair, setHair] = useState(detail.hair);
+    const [reason, setReason] = useState(detail.reason_for_arrival);
     const [image, setImage] = useState<File | null>(null);
     const handlerEditPicture = () => {
         const fileInput = document.getElementById("imageInput")
