@@ -33,12 +33,12 @@ const NewData: React.FC = () => {
     const dispatch: AppDispatch = useDispatch();
     const openNewData = useSelector(selectOpenNewData);
     const [name, setName] = useState("");
-    const [gender, setGender] = useState("");
+    const [gender, setGender] = useState("male");
     const [age, setAge] = useState("");
     const [height, setHeight] = useState("");
     const [observations, setObservations] = useState("");
     const [color, setColor] = useState("");
-    const [hair, setHair] = useState("");
+    const [hair, setHair] = useState("long");
     const [reason, setReason] = useState("");
     const [image, setImage] = useState<File | null>(null);
     const handlerEditPicture = () => {

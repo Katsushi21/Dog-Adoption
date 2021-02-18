@@ -139,20 +139,6 @@ export const dog_dataSlice = createSlice({
         setDetailData: (state, action) => {
             state.detail = action.payload;
         },
-        setEditData: (state, action) => {
-          const edited = state.data.find((e) => e.id === action.payload.id)
-            if (edited) {
-                edited.dogName = action.payload.dogName;
-                edited.gender = action.payload.gender;
-                edited.age = action.payload.age;
-                edited.height = action.payload.height;
-                edited.observations = action.payload.observations;
-                edited.color = action.payload.color;
-                edited.hair = action.payload.hair;
-                edited.reason_for_arrival = action.payload.reason_for_arrival;
-                edited.photo = action.payload.photo;
-            }
-        },
     },
 
     extraReducers: (builder) => {
@@ -171,6 +157,7 @@ export const dog_dataSlice = createSlice({
             return state
         });
         builder.addCase(fetchAsyncUpdateData.fulfilled, (state, action) => {
+            state.detail = action.payload;
             state.data = state.data.map((input) =>
                 input.id === action.payload.id ? action.payload : input
             );
@@ -180,7 +167,6 @@ export const dog_dataSlice = createSlice({
 
 export const {
     fetchDataStart, fetchDataEnd, setOpenNewData, resetOpenNewData, setOpenEditData, resetOpenEditData, setDetailData,
-    setEditData,
 } = dog_dataSlice.actions;
 
 export const selectIsLoadingData = (state: RootState) => state.dog_data.isLoadingData;

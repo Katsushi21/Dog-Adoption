@@ -49,6 +49,7 @@ const EditData: React.FC = () => {
         const fileInput = document.getElementById("imageInput")
         fileInput?.click();
     };
+    console.log(name)
 
     const updateData = async (e: React.MouseEvent<HTMLElement>) => {
         e.preventDefault();
