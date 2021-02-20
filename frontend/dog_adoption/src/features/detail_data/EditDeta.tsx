@@ -33,7 +33,6 @@ const EditData: React.FC = () => {
     const dispatch: AppDispatch = useDispatch();
     const openEditData = useSelector(selectOpenEditData);
     const {id} = useParams()
-    // eslint-disable-next-line eqeqeq
     const detail = useSelector(selectDetailData)
 
     const [name, setName] = useState(detail.dogName);

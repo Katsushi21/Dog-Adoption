@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {useParams} from "react-router-dom";
 import {fetchDataEnd, fetchDataStart, toCharUppercase} from "../dog_data/dog_dataSlice";
 import {IoFemale, IoMale, MdKeyboardReturn} from "react-icons/all";
@@ -6,7 +6,7 @@ import styles from "./DetailData.module.css";
 import {Avatar, Button} from "@material-ui/core";
 import {useDispatch, useSelector} from "react-redux";
 import {selectProfile, selectProfiles} from "../auth/authSlice";
-import {fetchAsyncDeleteData, setOpenEditData, selectDetailData} from "../dog_data/dog_dataSlice"
+import {fetchAsyncDeleteData, setOpenEditData, selectData, setDetailData, selectDetailData} from "../dog_data/dog_dataSlice"
 import {AppDispatch} from "../../app/store";
 import {PROPS_DATA} from "../types"
 import EditData from "./EditDeta";
@@ -15,10 +15,15 @@ import EditData from "./EditDeta";
 const DetailData: React.FC<PROPS_DATA> = () => {
     const dispatch: AppDispatch = useDispatch();
     const {id} = useParams()
-    const detail = useSelector(selectDetailData)
-    const serializedState = JSON.stringify(detail)
-    localStorage.setItem("Detail", serializedState);
+    // eslint-disable-next-line eqeqeq
+    const preData = useSelector(selectData).find(e => e.id == id);
 
+    useEffect(() => {
+        dispatch(setDetailData(preData));
+        console.log("haii")
+    }, [dispatch])
+
+    const detail = useSelector(selectDetailData)
 
     const profiles = useSelector(selectProfiles);
     const prof = profiles.filter((prof) => {

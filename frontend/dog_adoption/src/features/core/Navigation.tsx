@@ -6,7 +6,7 @@ import {AppDispatch} from "../../app/store";
 import {withStyles} from "@material-ui/core/styles";
 import {Button, Avatar, Badge, CircularProgress} from "@material-ui/core";
 import {SiDatadog} from "react-icons/all";
-import {Link} from "react-router-dom"
+import {Link, useParams} from "react-router-dom"
 
 import {
     fetchAsyncGetMyProfile,
