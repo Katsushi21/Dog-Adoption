@@ -45,9 +45,9 @@ export const fetchAsyncDeleteData = createAsyncThunk("dog_data/delete",
         const res = await axios.delete(`${adoptionUrlData}${id}/`, {
             headers: {
                 "Authorization": `JWT ${localStorage.localJWT}`,
-            }
+            },
         });
-        return res.data;
+        return res.data
     });
 
 //保護犬のデータを更新する記述
@@ -139,6 +139,11 @@ export const dog_dataSlice = createSlice({
         setDetailData: (state, action) => {
             state.detail = action.payload;
         },
+        setDeleteData: (state, action) => {
+            return (
+                {...state, data: state.data.filter((e) => e.id !== action.payload.dataId)}
+            );
+        },
     },
 
     extraReducers: (builder) => {
@@ -152,10 +157,6 @@ export const dog_dataSlice = createSlice({
                 ...state, data: [...state.data, action.payload],
             };
         });
-        builder.addCase(fetchAsyncDeleteData.fulfilled, (state, action) => {
-            delete state.data[action.payload]
-            return state
-        });
         builder.addCase(fetchAsyncUpdateData.fulfilled, (state, action) => {
             state.detail = action.payload;
             state.data = state.data.map((input) =>
@@ -166,7 +167,8 @@ export const dog_dataSlice = createSlice({
 });
 
 export const {
-    fetchDataStart, fetchDataEnd, setOpenNewData, resetOpenNewData, setOpenEditData, resetOpenEditData, setDetailData,
+    fetchDataStart, fetchDataEnd, setOpenNewData, resetOpenNewData, setOpenEditData, resetOpenEditData,
+    setDetailData, setDeleteData,
 } = dog_dataSlice.actions;
 
 export const selectIsLoadingData = (state: RootState) => state.dog_data.isLoadingData;

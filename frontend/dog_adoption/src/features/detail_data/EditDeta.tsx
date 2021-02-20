@@ -48,7 +48,19 @@ const EditData: React.FC = () => {
         const fileInput = document.getElementById("imageInput")
         fileInput?.click();
     };
-    console.log(name)
+
+    const handleCloseModal = () => {
+        setName(detail.dogName);
+        setGender(detail.gender);
+        setAge(detail.age);
+        setHeight(detail.height);
+        setObservations(detail.observations);
+        setColor(detail.color);
+        setHair(detail.hair);
+        setReason(detail.reason_for_arrival);
+        setImage(null);
+        dispatch(resetOpenEditData());
+    }
 
     const updateData = async (e: React.MouseEvent<HTMLElement>) => {
         e.preventDefault();
@@ -69,9 +81,7 @@ const EditData: React.FC = () => {
     return (
         <>
             <Modal isOpen={openEditData}
-                   onRequestClose={async () => {
-                       await dispatch(resetOpenEditData());
-                   }}
+                   onRequestClose={async () => {handleCloseModal()}}
                    style={customStyles}>
                 <form className={styles.core_signUp}>
                     <h1 className={styles.core_title}>Update Data</h1>

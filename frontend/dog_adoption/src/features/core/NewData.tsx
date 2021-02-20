@@ -55,13 +55,13 @@ const NewData: React.FC = () => {
         await dispatch(fetchAsyncNewData(packet));
         await dispatch(fetchDataEnd());
         setName("");
-        setGender("")
-        setAge("")
-        setHeight("")
-        setObservations("")
-        setColor("")
-        setHair("")
-        setReason("")
+        setGender("male");
+        setAge("");
+        setHeight("");
+        setObservations("");
+        setColor("");
+        setHair("long");
+        setReason("");
         setImage(null);
         dispatch(resetOpenNewData());
     };
