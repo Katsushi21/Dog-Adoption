@@ -2,8 +2,10 @@ import React from "react";
 import styles from "./DogData.module.css"
 import {PROPS_DATA} from "../types";
 import {IoFemale, IoMale} from "react-icons/all";
-import {toCharUppercase} from "./dog_dataSlice";
+import {toCharUppercase, setDetailData} from "./dog_dataSlice";
 import {Link} from "react-router-dom";
+import {AppDispatch} from "../../app/store";
+import {useDispatch} from "react-redux";
 
 
 // 各保護犬データの一覧表示
@@ -23,15 +25,19 @@ const DogData: React.FC<PROPS_DATA> = ({
                                            companyPost,
                                            registered_at,
                                        }) => {
-
+    const dispatch: AppDispatch = useDispatch();
     const packet = {
         dataId, loginId, dogName, gender, age, height, observations,
         color, hair, reason_for_arrival, photo, procedure, companyPost, registered_at
     }
 
+    const handleDetailData = () => {
+        dispatch(setDetailData(packet))
+    }
+
     if (dogName) {
         return (
-            <Link to={{pathname: `/${dataId}`, state: {detail: packet}}} className={styles.core_link}>
+            <Link to={`/${dataId}`} className={styles.core_link} onClick={()=>{handleDetailData()}}>
                 <div className={styles.dog_data}>
                     <img className={styles.dog_data_image} src={photo} alt=""/>
                     <div className={styles.dog_data_name_container}>

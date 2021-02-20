@@ -52,7 +52,8 @@ const EditProfile: React.FC = () => {
                 <form className={styles.core_signUp}>
                     <h1 className={styles.core_edit_profile}>Edit Profile</h1>
                     <br/>
-                    <TextField placeholder="Account Name" type="text"
+                    <TextField placeholder="Account Name"
+                               type="text"
                                value={profile?.accountName}
                                onChange={(e) => dispatch(editAccountName(e.target.value))}/>
                     <input type="file" id="imageInput" hidden={true} onChange={(e) => setImage(e.target.files![0])}
