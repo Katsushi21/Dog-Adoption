@@ -23,7 +23,7 @@ const DogData: React.FC<PROPS_DATA> = ({
                                            procedure,
                                            companyPost,
                                            registered_at,
-                                       }, page) => {
+                                       }) => {
     const dispatch: AppDispatch = useDispatch();
     const packet = {
         dataId, dogName, gender, age, height, observations,
@@ -36,7 +36,9 @@ const DogData: React.FC<PROPS_DATA> = ({
 
     if (dogName) {
         return (
-            <Link to={`/${dataId}`} className={styles.core_link} onClick={()=>{handleDetailData()}}>
+            <Link to={`/${dataId}`} className={styles.core_link} onClick={() => {
+                handleDetailData()
+            }}>
                 <div className={styles.dog_data}>
                     <img className={styles.dog_data_image} src={photo} alt=""/>
                     <div className={styles.dog_data_name_container}>

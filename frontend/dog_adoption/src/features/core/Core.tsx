@@ -15,7 +15,6 @@ const Core: React.FC = () => {
     // ページネーションに関する記述
     const initialPage = Number(sessionStorage.getItem("page"))
     const [pageNumber, setPageNumber] = useState(initialPage);
-    console.log(pageNumber)
     const dataPerPage = 6;
     const marginPagesDisplayed = 6;
     const pageRangeDisplayed = 3;
