@@ -10,6 +10,7 @@ import {
 } from "../auth/authSlice";
 import {Button, TextField, IconButton} from "@material-ui/core";
 import {MdAddAPhoto} from "react-icons/md";
+import {resetOpenNewData} from "../dog_data/dog_dataSlice";
 
 const customStyles = {
     content: {
@@ -27,6 +28,13 @@ const EditProfile: React.FC = () => {
     const openProfile = useSelector(selectOpenProfile);
     const profile = useSelector(selectProfile);
     const [image, setImage] = useState<File | null>(null);
+
+    const handleCloseModal = () => {
+
+        setImage(null);
+        dispatch(resetOpenNewData());
+    }
+
     const updateProfile = async (e: React.MouseEvent<HTMLElement>) => {
         e.preventDefault();
         const packet = {id: profile.id, accountName: profile.accountName, avatar: image};
@@ -45,7 +53,7 @@ const EditProfile: React.FC = () => {
         <>
             <Modal isOpen={openProfile}
                    onRequestClose={async () => {
-                       await dispatch(resetOpenProfile());
+                       dispatch(handleCloseModal);
                    }}
                    style={customStyles}
             >

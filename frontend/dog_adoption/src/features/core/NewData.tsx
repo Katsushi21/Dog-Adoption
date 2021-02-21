@@ -9,7 +9,7 @@ import {
     fetchDataEnd,
     fetchAsyncNewData,
     resetOpenNewData,
-    selectOpenNewData,
+    selectOpenNewData, resetOpenEditData,
 } from "../dog_data/dog_dataSlice";
 
 import {
@@ -45,15 +45,8 @@ const NewData: React.FC = () => {
         const fileInput = document.getElementById("imageInput")
         fileInput?.click();
     };
-    const newData = async (e: React.MouseEvent<HTMLElement>) => {
-        e.preventDefault();
-        const packet = {
-            dogName: name, gender: gender, age: age, height: height, observations: observations,
-            color: color, hair: hair, reason_for_arrival: reason, photo: image, procedure: "no"
-        };
-        await dispatch(fetchDataStart());
-        await dispatch(fetchAsyncNewData(packet));
-        await dispatch(fetchDataEnd());
+
+    const handleCloseModal = () => {
         setName("");
         setGender("male");
         setAge("");
@@ -64,15 +57,30 @@ const NewData: React.FC = () => {
         setReason("");
         setImage(null);
         dispatch(resetOpenNewData());
+    }
+
+    const newData = async (e: React.MouseEvent<HTMLElement>) => {
+        e.preventDefault();
+        const packet = {
+            dogName: name, gender: gender, age: age, height: height, observations: observations,
+            color: color, hair: hair, reason_for_arrival: reason, photo: image, procedure: "no"
+        };
+        await dispatch(fetchDataStart());
+        await dispatch(fetchAsyncNewData(packet));
+        await dispatch(fetchDataEnd());
+        handleCloseModal()
     };
     const genderOption = [{value: "male", label: "Male"}, {value: "female", label: "Female"}];
-    const hairOption = [{value: "long", label: "Long"}, {value: "middle", label: "Middle"}, {value: "short", label: "Short"}];
+    const hairOption = [{value: "long", label: "Long"}, {value: "middle", label: "Middle"}, {
+        value: "short",
+        label: "Short"
+    }];
 
     return (
         <>
             <Modal isOpen={openNewData}
                    onRequestClose={async () => {
-                       await dispatch(resetOpenNewData());
+                       dispatch(handleCloseModal);
                    }}
                    style={customStyles}>
                 <form className={styles.core_signUp}>
