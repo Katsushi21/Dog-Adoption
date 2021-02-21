@@ -28,7 +28,7 @@ class MyProfileListView(generics.ListAPIView):
 
 
 class Dog_DataViewSet(viewsets.ModelViewSet):
-    queryset = Dog_Data.objects.all()
+    queryset = Dog_Data.objects.all().order_by("-id")
     serializer_class = serializers.Dog_DataSerializer
 
     def perform_create(self, serializer):

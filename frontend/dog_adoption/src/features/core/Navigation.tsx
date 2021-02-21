@@ -86,7 +86,7 @@ const Navigation: React.FC = () => {
             <EditProfile/>
             <NewData/>
             <div className={styles.core_header}>
-                <Link to="/" className={styles.core_link}>
+                <Link to="/" className={styles.core_link} onClick={() => {sessionStorage.removeItem("page")}}>
                     <h1 className={styles.core_title}>Dog Adoption</h1>
                 </Link>
                 {profile?.accountName ? (

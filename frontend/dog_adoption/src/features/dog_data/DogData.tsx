@@ -11,7 +11,6 @@ import {useDispatch} from "react-redux";
 // 各保護犬データの一覧表示
 const DogData: React.FC<PROPS_DATA> = ({
                                            dataId,
-                                           loginId,
                                            dogName,
                                            gender,
                                            age,
@@ -27,7 +26,7 @@ const DogData: React.FC<PROPS_DATA> = ({
                                        }) => {
     const dispatch: AppDispatch = useDispatch();
     const packet = {
-        dataId, loginId, dogName, gender, age, height, observations,
+        dataId, dogName, gender, age, height, observations,
         color, hair, reason_for_arrival, photo, procedure, companyPost, registered_at
     }
 
@@ -37,7 +36,9 @@ const DogData: React.FC<PROPS_DATA> = ({
 
     if (dogName) {
         return (
-            <Link to={`/${dataId}`} className={styles.core_link} onClick={()=>{handleDetailData()}}>
+            <Link to={`/${dataId}`} className={styles.core_link} onClick={() => {
+                handleDetailData()
+            }}>
                 <div className={styles.dog_data}>
                     <img className={styles.dog_data_image} src={photo} alt=""/>
                     <div className={styles.dog_data_name_container}>

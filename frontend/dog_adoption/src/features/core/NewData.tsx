@@ -7,9 +7,10 @@ import {File} from "../types";
 import {
     fetchDataStart,
     fetchDataEnd,
+    fetchAsyncGetData,
     fetchAsyncNewData,
     resetOpenNewData,
-    selectOpenNewData, resetOpenEditData,
+    selectOpenNewData,
 } from "../dog_data/dog_dataSlice";
 
 import {
@@ -67,6 +68,7 @@ const NewData: React.FC = () => {
         };
         await dispatch(fetchDataStart());
         await dispatch(fetchAsyncNewData(packet));
+        await dispatch(fetchAsyncGetData())
         await dispatch(fetchDataEnd());
         handleCloseModal()
     };

@@ -5,7 +5,6 @@ import {Grid, TextField, Toolbar} from "@material-ui/core";
 import {selectProfile,} from "../auth/authSlice";
 import {selectData} from "../dog_data/dog_dataSlice";
 import DogData from "../dog_data/DogData"
-import {Link} from "react-router-dom";
 import ReactPaginate from "react-paginate";
 
 
@@ -14,16 +13,17 @@ const Core: React.FC = () => {
     const some_data = useSelector(selectData);
 
     // ページネーションに関する記述
-    const [pageNumber, setPageNumber] = useState(0);
-    const dataPerPage = 9;
-    const marginPagesDisplayed = 9;
+    const initialPage = Number(sessionStorage.getItem("page"))
+    const [pageNumber, setPageNumber] = useState(initialPage);
+    const dataPerPage = 6;
+    const marginPagesDisplayed = 6;
     const pageRangeDisplayed = 3;
     const pagesVisited = pageNumber * dataPerPage;
     const dataCount = Math.ceil(some_data.length / dataPerPage);
-    // @ts-ignore
-    const changePage = ({selected}) => {
+    const changePage = ({selected}: any) => {
         setPageNumber(selected);
     };
+    sessionStorage.setItem("page", String(pageNumber))
 
 
     return (
@@ -33,25 +33,24 @@ const Core: React.FC = () => {
                     <Grid container spacing={4}>
                         {some_data
                             .slice(pagesVisited, pagesVisited + dataPerPage)
-                            .reverse()
                             .map((data) =>
                                 <Grid key={data.id} item xs={12} md={4}>
-                                        <DogData
-                                            dataId={data.id}
-                                            loginId={profile.accountProfile}
-                                            dogName={data.dogName}
-                                            gender={data.gender}
-                                            age={data.age}
-                                            height={data.height}
-                                            observations={data.observations}
-                                            color={data.color}
-                                            hair={data.hair}
-                                            reason_for_arrival={data.reason_for_arrival}
-                                            photo={data.photo}
-                                            procedure={data.procedure}
-                                            companyPost={data.companyPost}
-                                            registered_at={data.registered_at}
-                                        />
+                                    <DogData
+                                        dataId={data.id}
+                                        loginId={profile.accountProfile}
+                                        dogName={data.dogName}
+                                        gender={data.gender}
+                                        age={data.age}
+                                        height={data.height}
+                                        observations={data.observations}
+                                        color={data.color}
+                                        hair={data.hair}
+                                        reason_for_arrival={data.reason_for_arrival}
+                                        photo={data.photo}
+                                        procedure={data.procedure}
+                                        companyPost={data.companyPost}
+                                        registered_at={data.registered_at}
+                                    />
                                 </Grid>
                             )}
                     </Grid>
@@ -68,6 +67,7 @@ const Core: React.FC = () => {
                                    nextLinkClassName={"nextButton"}
                                    disabledClassName={"paginationDisabled"}
                                    activeClassName={styles.paginationActive}
+                                   initialPage={initialPage}
                     />
                 </div>
             </div>
