@@ -19,7 +19,6 @@ import {
     selectProfile,
     setOpenProfile,
     resetOpenProfile,
-    editAccountName
 } from "../auth/authSlice";
 
 import {
@@ -108,7 +107,6 @@ const Navigation: React.FC = () => {
                             {(isLoadingData || isLoadingAuth) && <CircularProgress/>}
                             <Button onClick={() => {
                                 localStorage.removeItem("localJWT");
-                                dispatch(editAccountName(""));
                                 dispatch(resetOpenProfile());
                                 dispatch(resetOpenNewData());
                                 dispatch(setOpenSignIn());

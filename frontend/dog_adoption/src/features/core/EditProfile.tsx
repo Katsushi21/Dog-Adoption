@@ -6,11 +6,10 @@ import {AppDispatch} from "../../app/store";
 import {File} from "../types";
 import {
     fetchCredStart, fetchCredEnd, fetchAsyncUpdateProfile,
-    selectOpenProfile, selectProfile, resetOpenProfile, editAccountName
+    selectOpenProfile, selectProfile, resetOpenProfile,
 } from "../auth/authSlice";
 import {Button, TextField, IconButton} from "@material-ui/core";
 import {MdAddAPhoto} from "react-icons/md";
-import {resetOpenNewData} from "../dog_data/dog_dataSlice";
 
 const customStyles = {
     content: {
@@ -27,17 +26,18 @@ const EditProfile: React.FC = () => {
     const dispatch: AppDispatch = useDispatch();
     const openProfile = useSelector(selectOpenProfile);
     const profile = useSelector(selectProfile);
+    const [name, setName] = useState(profile.accountName);
     const [image, setImage] = useState<File | null>(null);
 
     const handleCloseModal = () => {
-
+        setName(profile.accountName)
         setImage(null);
-        dispatch(resetOpenNewData());
+        dispatch(resetOpenProfile());
     }
 
     const updateProfile = async (e: React.MouseEvent<HTMLElement>) => {
         e.preventDefault();
-        const packet = {id: profile.id, accountName: profile.accountName, avatar: image};
+        const packet = {id: profile.id, accountName: name, avatar: image};
         await dispatch(fetchCredStart());
         await dispatch(fetchAsyncUpdateProfile(packet));
         await dispatch(fetchCredEnd());
@@ -62,8 +62,8 @@ const EditProfile: React.FC = () => {
                     <br/>
                     <TextField placeholder="Account Name"
                                type="text"
-                               value={profile?.accountName}
-                               onChange={(e) => dispatch(editAccountName(e.target.value))}/>
+                               defaultValue={profile?.accountName}
+                               onChange={(e) => setName(e.target.value)}/>
                     <input type="file" id="imageInput" hidden={true} onChange={(e) => setImage(e.target.files![0])}
                     />
                     <br/>
