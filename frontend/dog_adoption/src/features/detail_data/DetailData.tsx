@@ -41,7 +41,7 @@ const DetailData: React.FC<PROPS_DATA> = () => {
             <div className={styles.detail_data}>
                 <div className={styles.detail_back_container}>
                     <Button className={styles.detail_back_button} color="default" variant="outlined"
-                            style={{fontSize: "36px"}}>
+                            style={{fontSize: "36px"}} onClick={() => history.push("/")}>
                         BACK<MdKeyboardReturn/>
                     </Button>
                 </div>

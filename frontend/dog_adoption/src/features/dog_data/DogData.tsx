@@ -11,7 +11,6 @@ import {useDispatch} from "react-redux";
 // 各保護犬データの一覧表示
 const DogData: React.FC<PROPS_DATA> = ({
                                            dataId,
-                                           loginId,
                                            dogName,
                                            gender,
                                            age,
@@ -24,10 +23,10 @@ const DogData: React.FC<PROPS_DATA> = ({
                                            procedure,
                                            companyPost,
                                            registered_at,
-                                       }) => {
+                                       }, page) => {
     const dispatch: AppDispatch = useDispatch();
     const packet = {
-        dataId, loginId, dogName, gender, age, height, observations,
+        dataId, dogName, gender, age, height, observations,
         color, hair, reason_for_arrival, photo, procedure, companyPost, registered_at
     }
 
