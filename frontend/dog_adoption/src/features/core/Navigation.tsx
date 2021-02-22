@@ -3,8 +3,7 @@ import Auth from "../auth/Auth";
 import styles from "./Core.module.css";
 import {useSelector, useDispatch} from "react-redux";
 import {AppDispatch} from "../../app/store";
-import {withStyles} from "@material-ui/core/styles";
-import {Button, Avatar, Badge, CircularProgress} from "@material-ui/core";
+import {Button, Avatar, CircularProgress} from "@material-ui/core";
 import {SiDatadog} from "react-icons/all";
 import {Link} from "react-router-dom"
 
@@ -19,6 +18,7 @@ import {
     selectProfile,
     setOpenProfile,
     resetOpenProfile,
+    editAccountName,
 } from "../auth/authSlice";
 
 import {
@@ -27,35 +27,6 @@ import {
 
 import EditProfile from "./EditProfile";
 import NewData from "./NewData";
-
-const StyledBadge = withStyles((theme) => ({
-    badge: {
-        backgroundColor: '#44b700',
-        color: '#44b700',
-        boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
-        '&::after': {
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            borderRadius: '50%',
-            animation: '$ripple 1.2s infinite ease-in-out',
-            border: '1px solid currentColor',
-            content: '""',
-        },
-    },
-    '@keyframes ripple': {
-        '0%': {
-            transform: 'scale(.8)',
-            opacity: 1,
-        },
-        '100%': {
-            transform: 'scale(2.4)',
-            opacity: 0,
-        },
-    },
-}))(Badge);
 
 const Navigation: React.FC = () => {
     const dispatch: AppDispatch = useDispatch();
@@ -86,7 +57,9 @@ const Navigation: React.FC = () => {
             <EditProfile/>
             <NewData/>
             <div className={styles.core_header}>
-                <Link to="/" className={styles.core_link} onClick={() => {sessionStorage.removeItem("page")}}>
+                <Link to="/" className={styles.core_link} onClick={() => {
+                    sessionStorage.removeItem("page")
+                }}>
                     <h1 className={styles.core_title}>Dog Adoption</h1>
                 </Link>
                 {profile?.accountName ? (
@@ -107,6 +80,7 @@ const Navigation: React.FC = () => {
                             {(isLoadingData || isLoadingAuth) && <CircularProgress/>}
                             <Button onClick={() => {
                                 localStorage.removeItem("localJWT");
+                                dispatch(editAccountName(""))
                                 dispatch(resetOpenProfile());
                                 dispatch(resetOpenNewData());
                                 dispatch(setOpenSignIn());
@@ -119,18 +93,8 @@ const Navigation: React.FC = () => {
                                         dispatch(setOpenProfile());
                                         dispatch(resetOpenNewData());
                                         dispatch(resetOpenEditData());
-                                    }}
-                            >
-                                <StyledBadge
-                                    overlap="circle"
-                                    anchorOrigin={{
-                                        vertical: 'bottom',
-                                        horizontal: 'right',
-                                    }}
-                                    variant="dot"
-                                >
+                                    }}>
                                     <Avatar alt="Who?" src={profile.avatar}/>{" "}
-                                </StyledBadge>
                             </button>
                         </div>
                     </>

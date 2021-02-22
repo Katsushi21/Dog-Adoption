@@ -41,6 +41,20 @@ const Auth: React.FC = () => {
     const typeOption = [{value: "company", label: "Conservation group"}, {value: "ordinary", label: "Ordinary person"}];
     const [type, setType] = useState("");
 
+    const guestLogin = async () => {
+        await dispatch(fetchCredStart());
+        const result = await dispatch(fetchAsyncLogin({email: "cguest@xxx.com", password: "xxx"}));
+
+        if (fetchAsyncLogin.fulfilled.match(result)) {
+            await dispatch(fetchAsyncGetProfiles());
+            await dispatch(fetchAsyncGetData());
+            await dispatch(fetchAsyncGetMyProfile());
+        }
+        await dispatch(fetchCredEnd());
+        await dispatch(resetOpenSignIn());
+    }
+
+
     return (
         <>
             <Modal
@@ -118,7 +132,6 @@ const Auth: React.FC = () => {
                                         SIGN UP
                                     </Button>
                                     <br/>
-                                    <br/>
                                     <span className={styles.auth_text} onClick={async () => {
                                         await dispatch(setOpenSignIn());
                                         await dispatch(resetOpenSignUp());
@@ -185,11 +198,16 @@ const Auth: React.FC = () => {
                                         Log In
                                     </Button>
                                     <br/>
-                                    <br/>
                                     <span className={styles.auth_text} onClick={async () => {
                                         await dispatch(resetOpenSignIn());
                                         await dispatch(setOpenSignUp());
                                     }}>Don't you have an account ?</span>
+                                    <br/>
+                                    <Button variant="contained" color="secondary" onClick={() => {
+                                        guestLogin().then(r => console.log(r))
+                                    }}>
+                                        Guest Log In
+                                    </Button>
                                 </div>
                             </form>
                         </div>

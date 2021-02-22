@@ -32,6 +32,7 @@ const DetailData: React.FC<PROPS_DATA> = () => {
         await dispatch(fetchAsyncDeleteData(id));
         await dispatch(fetchDataEnd());
         dispatch(setDeleteData(detail))
+        sessionStorage.removeItem("page")
         history.push("/")
     };
 

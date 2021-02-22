@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import styles from "./Core.module.css";
 import {useSelector} from "react-redux";
-import {Grid, TextField, Toolbar} from "@material-ui/core";
+import {Grid} from "@material-ui/core";
 import {selectProfile,} from "../auth/authSlice";
 import {selectData} from "../dog_data/dog_dataSlice";
 import DogData from "../dog_data/DogData"

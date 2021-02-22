@@ -70,6 +70,7 @@ const NewData: React.FC = () => {
         await dispatch(fetchAsyncNewData(packet));
         await dispatch(fetchAsyncGetData())
         await dispatch(fetchDataEnd());
+        sessionStorage.removeItem("page")
         handleCloseModal()
     };
     const genderOption = [{value: "male", label: "Male"}, {value: "female", label: "Female"}];

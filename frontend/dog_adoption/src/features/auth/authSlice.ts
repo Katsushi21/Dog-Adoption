@@ -135,6 +135,9 @@ export const authSlice = createSlice({
         resetOpenProfile(state) {
             state.openProfile = false;
         },
+        editAccountName(state, action) {
+            state.myprofile.accountName = action.payload;
+        }
     },
 
     // 非同期関数の後処理を定義
@@ -161,7 +164,7 @@ export const authSlice = createSlice({
 });
 
 export const {
-    fetchCredStart, fetchCredEnd, setOpenSignIn, resetOpenSignIn, setOpenSignUp, resetOpenSignUp,
+    fetchCredStart, fetchCredEnd, setOpenSignIn, resetOpenSignIn, setOpenSignUp, resetOpenSignUp, editAccountName,
     setOpenProfile, resetOpenProfile,
 } = authSlice.actions;
 
