@@ -3,7 +3,7 @@ import Auth from "../auth/Auth";
 import styles from "./Core.module.css";
 import {useSelector, useDispatch} from "react-redux";
 import {AppDispatch} from "../../app/store";
-import {Button, Avatar, CircularProgress} from "@material-ui/core";
+import {Button, Avatar} from "@material-ui/core";
 import {SiDatadog} from "react-icons/all";
 import {Link} from "react-router-dom"
 
@@ -14,15 +14,14 @@ import {
     resetOpenSignIn,
     setOpenSignUp,
     resetOpenSignUp,
-    selectIsLoadingAuth,
     selectProfile,
     setOpenProfile,
     resetOpenProfile,
-    editAccountName,
+    editAccountName, fetchCredStart, fetchAsyncLogin, fetchCredEnd,
 } from "../auth/authSlice";
 
 import {
-    setOpenNewData, resetOpenNewData, fetchAsyncGetData, selectIsLoadingData, resetOpenEditData
+    setOpenNewData, resetOpenNewData, fetchAsyncGetData, resetOpenEditData
 } from "../dog_data/dog_dataSlice";
 
 import EditProfile from "./EditProfile";
@@ -31,8 +30,6 @@ import NewData from "./NewData";
 const Navigation: React.FC = () => {
     const dispatch: AppDispatch = useDispatch();
     const profile = useSelector(selectProfile);
-    const isLoadingData = useSelector(selectIsLoadingData);
-    const isLoadingAuth = useSelector(selectIsLoadingAuth);
 
     // ブラウザが起動した際に実行される処理
     useEffect(() => {
@@ -50,6 +47,19 @@ const Navigation: React.FC = () => {
         };
         fetchBootLoader().then(r => console.log(r));
     }, [dispatch]);
+
+
+    const handleChangeUserType = async (input: any) => {
+        localStorage.removeItem("localJWT");
+        await dispatch(fetchCredStart());
+        const result = await dispatch(fetchAsyncLogin(input));
+        if (fetchAsyncLogin.fulfilled.match(result)) {
+            await dispatch(fetchAsyncGetProfiles());
+            await dispatch(fetchAsyncGetMyProfile());
+        }
+        await dispatch(fetchCredEnd());
+        await dispatch(resetOpenSignIn());
+    }
 
     return (
         <div>
@@ -76,11 +86,29 @@ const Navigation: React.FC = () => {
                             </button> :
                             null
                         }
+                        {profile.id === 7 ?
+                            <Button variant="contained" color="secondary" onClick={() => {
+                                handleChangeUserType({
+                                    email: "oguest@xxx.com",
+                                    password: "xxx"
+                                }).then(r => console.log((r)))
+                            }}>ユーザータイプを飼い主に</Button>
+                            :
+                            null}
+                        {profile.id === 8 ?
+                            <Button variant="contained" color="secondary" onClick={() => {
+                                handleChangeUserType({
+                                    email: "cguest@xxx.com",
+                                    password: "xxx"
+                                }).then(r => console.log((r)))
+                            }}>ユーザータイプを保護団体に</Button>
+                            :
+                            null}
                         <div className={styles.core_logout}>
-                            {(isLoadingData || isLoadingAuth) && <CircularProgress/>}
                             <Button onClick={() => {
                                 localStorage.removeItem("localJWT");
-                                dispatch(editAccountName(""))
+                                localStorage.removeItem("guest");
+                                dispatch(editAccountName(""));
                                 dispatch(resetOpenProfile());
                                 dispatch(resetOpenNewData());
                                 dispatch(setOpenSignIn());
@@ -94,7 +122,7 @@ const Navigation: React.FC = () => {
                                         dispatch(resetOpenNewData());
                                         dispatch(resetOpenEditData());
                                     }}>
-                                    <Avatar alt="Who?" src={profile.avatar}/>{" "}
+                                <Avatar alt="Who?" src={profile.avatar}/>{" "}
                             </button>
                         </div>
                     </>

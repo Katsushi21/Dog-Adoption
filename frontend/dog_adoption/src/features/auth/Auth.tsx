@@ -41,6 +41,7 @@ const Auth: React.FC = () => {
     const typeOption = [{value: "company", label: "Conservation group"}, {value: "ordinary", label: "Ordinary person"}];
     const [type, setType] = useState("");
 
+
     const guestLogin = async () => {
         await dispatch(fetchCredStart());
         const result = await dispatch(fetchAsyncLogin({email: "cguest@xxx.com", password: "xxx"}));
@@ -52,6 +53,7 @@ const Auth: React.FC = () => {
         }
         await dispatch(fetchCredEnd());
         await dispatch(resetOpenSignIn());
+        localStorage.setItem("guest", "guest");
     }
 
 
