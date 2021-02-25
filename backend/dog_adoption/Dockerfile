@@ -10,4 +10,7 @@ RUN pip install -r requirements.txt
 
 COPY . /dog_adoption
 
+RUN chmod -R 755 staticfiles
+RUN chown -R root staticfiles
+
 EXPOSE 8000

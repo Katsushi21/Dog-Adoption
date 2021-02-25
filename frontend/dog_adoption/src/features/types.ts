@@ -12,10 +12,7 @@ export interface PROPS_AUTHEN {
 export interface PROPS_PROFILE {
     id: number;
     accountName: string;
-    // accountProfile: string;
     avatar: File | null;
-    // totalDonation: number;
-    // accountType: string;
 }
 
 export interface PROPS_ACCOUNT_NAME {
