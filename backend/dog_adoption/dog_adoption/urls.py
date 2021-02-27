@@ -4,8 +4,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('adoption/', include('adoption.urls')),
-    path('authen/', include('djoser.urls.jwt')),
+    path('api/admin/', admin.site.urls),
+    path('api/adoption/', include('adoption.urls')),
+    path('api/authen/', include('djoser.urls.jwt')),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
