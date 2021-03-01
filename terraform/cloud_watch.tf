@@ -1,9 +1,6 @@
-#################
-# CloudWatchLog #
-#################
-resource "aws_cloudwatch_log_group" "gadget-ecs-api" {
-  name              = "/ecs/api"
-  retention_in_days = 180
+resource "aws_cloudwatch_log_group" "dog-adoption-ecs-nginx" {
+  name              = "/ecs/nginx"
+  retention_in_days = 90
 }
 resource "aws_cloudwatch_log_group" "gadget-ecs-front" {
   name              = "/ecs/front"

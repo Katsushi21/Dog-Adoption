@@ -3,7 +3,7 @@ resource "aws_lb" "dog-adoption-alb" {
   load_balancer_type         = "application"
   internal                   = false
   idle_timeout               = 60
-  enable_deletion_protection = false
+  enable_deletion_protection = true
 
   subnets = [
     aws_subnet.dog-adoption-public.id,
@@ -15,10 +15,16 @@ resource "aws_lb" "dog-adoption-alb" {
   }
 
   security_groups = [
-    aws_security_group.
+    module.http_sg.security_group_id,
+    module.https_sg.security_group_id,
+    module.http_redirect_sg.security_group_id,
   ]
 
   tags = {
     Name = "dog-adoption-alb"
   }
+}
+
+output "dog-adoption-dns-name" {
+  value = aws_lb.dog-adoption-alb.dns_name
 }
