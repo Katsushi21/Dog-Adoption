@@ -18,13 +18,3 @@ resource "aws_subnet" "dog-adoption-private" {
     Name = "dog-adoption-private"
   }
 }
-
-
-###############
-# SubnetGroup #
-###############
-resource "aws_db_subnet_group" "gadget-rds-subnet-group" {
-  name        = "gadget-rds-subnet-group"
-  description = "rds subnet for gadget"
-  subnet_ids  = [aws_subnet.gadget-private-1a.id, aws_subnet.gadget-private-1c.id]
-}
