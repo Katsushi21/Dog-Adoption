@@ -3,11 +3,11 @@
 #########
 
 #__________  api  __________#
-resource "aws_ecr_repository" "gadget-api" {
-  name = "gadget-api"
+resource "aws_ecr_repository" "dog-adoption-backend" {
+  name = "dog-adoption-backend"
 }
-resource "aws_ecr_lifecycle_policy" "gadget-api-policy" {
-  repository = aws_ecr_repository.gadget-api.name
+resource "aws_ecr_lifecycle_policy" "dog-adoption-backend-policy" {
+  repository = aws_ecr_repository.dog-adoption-backend.name
 
   policy = <<EOF
   {
@@ -31,11 +31,11 @@ EOF
 }
 
 #__________ front __________#
-resource "aws_ecr_repository" "gadget-front" {
-  name = "gadget-front"
+resource "aws_ecr_repository" "dog-adoption-front" {
+  name = "dog-adoption-front"
 }
-resource "aws_ecr_lifecycle_policy" "gadget-front-policy" {
-  repository = aws_ecr_repository.gadget-front.name
+resource "aws_ecr_lifecycle_policy" "dog-adoption-front-policy" {
+  repository = aws_ecr_repository.dog-adoption-front.name
 
   policy = <<EOF
   {

@@ -1,6 +1,8 @@
 resource "aws_ecs_cluster" "dog-adoption-ecs-cluster" {
   name = "dog-adoption-ecs-cluster"
 }
+
+//nginx
 resource "aws_ecs_task_definition" "dog-adoption-nginx-ecs-task" {
   family                   = "dog-adoption-nginx-ecs-task"
   cpu                      = "256"
@@ -22,7 +24,7 @@ resource "aws_ecs_service" "dog-adoption-nginx-ecs-service" {
 
   network_configuration {
     assign_public_ip = false
-    security_groups  = [aws_security_group.nginx_sg.security_group_id]
+    security_groups  = [module.nginx_sg.security_group_id]
     subnets          = [aws_subnet.dog-adoption-private.id]
   }
 
@@ -52,8 +54,8 @@ module "nginx_sg" {
 
 
 
-resource "aws_ecs_task_definition" "gadget-api-task" {
-  family                   = "gadget-api-task"
+resource "aws_ecs_task_definition" "dog-adoption-backend-task" {
+  family                   = "dog-adoption-backend-task"
   cpu                      = "256"
   memory                   = "512"
   network_mode             = "awsvpc"
@@ -108,28 +110,4 @@ resource "aws_ecs_task_definition" "db-migrate-reset" {
   cpu                      = "256"
   memory                   = "512"
   execution_role_arn       = module.ecs_task_execution_role.iam_role_arn
-}
-
-##########
-#  権限   #
-##########
-data "aws_iam_policy" "ecs_task_execution_role_policy" {
-  arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
-}
-
-data "aws_iam_policy_document" "ecs_task_execution" {
-  source_json = data.aws_iam_policy.ecs_task_execution_role_policy.policy
-
-  statement {
-    effect    = "Allow"
-    actions   = ["ssm:GetParameters", "kms:Decrypt"]
-    resources = ["*"]
-  }
-}
-
-module "ecs_task_execution_role" {
-  source     = "./modules/iam_role"
-  name       = "ecs-task-execution"
-  identifier = "ecs-tasks.amazonaws.com"
-  policy     = data.aws_iam_policy_document.ecs_task_execution.json
 }
